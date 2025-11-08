@@ -1,0 +1,92 @@
+.rmpSlideinContainer {
+  position: fixed;
+  z-index: 9999;
+  background: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition-property: transform, opacity;
+  opacity: 0;
+}
+
+/* Top Banner */
+.rmpSlidein-top {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: auto;
+  transform: translateY(-100%);
+}
+
+/* Bottom Banner */
+.rmpSlidein-bottom {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: auto;
+  transform: translateY(100%);
+}
+
+/* Left Panel */
+.rmpSlidein-left {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 90%;
+  max-width: 320px;
+  transform: translateX(-100%);
+}
+
+/* Right Panel */
+.rmpSlidein-right {
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 90%;
+  max-width: 320px;
+  transform: translateX(100%);
+}
+
+/* Content */
+.rmpSlideinContent {
+  position: relative;
+  width: 100%;
+  padding: 1.25rem;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.rmpSlideinCloseBtn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  border: none;
+  background: transparent;
+  font-size: 1.25rem;
+  cursor: pointer;
+  color: #444;
+}
+
+.rmpSlideinIsOpen {
+  transform: translate(0, 0);
+  opacity: 1;
+}
+
+.rmpSlideinIsClosed {
+  opacity: 0;
+}
+
+@media (max-width: 600px) {
+  .rmpSlidein-left,
+  .rmpSlidein-right {
+    width: 100%;
+    max-width: none;
+  }
+
+  .rmpSlideinContent {
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+}

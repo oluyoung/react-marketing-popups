@@ -21,8 +21,8 @@ export type PopoutProps = {
   triggerProps?: any;
   isComplete?: boolean;
   elemProps?: {
-    overlayElProps?: HTMLDivElement,
-    containerElProps?: HTMLDivElement,
+    overlayElProps?: typeof HTMLDivElement,
+    containerElProps?: typeof HTMLDivElement,
   }
 };
 
@@ -58,7 +58,6 @@ export const Popout: React.FC<PopoutProps> = ({
       id={id ?? `rmp-overlay-${uid}`}
       className={cn(styles.rmpOverlay, overlayClassName)}
       role="dialog"
-      aria-label={ariaLabel}
       aria-modal="true"
       onMouseDown={(e) => {
         if (closeOnOverlay && e.target === e.currentTarget) onOpenChange(false);
@@ -69,7 +68,7 @@ export const Popout: React.FC<PopoutProps> = ({
         className={cn(styles.rmpContent, contentClassName)}
         ref={containerRef}
         tabIndex={-1}
-        {...(elemProps && elemProps.overlayElProps ? elemProps.overlayElProps : {})}
+        {...(elemProps && elemProps.containerElProps ? elemProps.containerElProps : {})}
       >
         {children}
         <button

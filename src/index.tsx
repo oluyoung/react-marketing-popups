@@ -2,6 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App';
 import PopoutDemo from './demos/PopoutDemo';
+import SlideInDemo from './demos/SlideInDemo';
 
 export { Popout } from "./components/Popout";
 export { Popout as PopoutCore } from "./components/Popout/Popout";
@@ -17,5 +18,6 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <App />
     <PopoutDemo />
+    <SlideInDemo />
   </StrictMode>,
 )
