@@ -6,15 +6,19 @@ import { Popout, type PopoutProps } from './Popout';
 export const PopoutByScroll: React.FC<PopoutProps> = (props) => {
   const [fired] = useScrollTrigger(props.triggerProps);
   const { hasSeen, markSeen } = usePersistence(props.id || 'rmp-popout-inactivity');
-  const [open, setOpen] = React.useState(false);
 
   React.useEffect(() => {
-    if (fired && !hasSeen()) setOpen(true);
-    if (props.isComplete) markSeen();
-  }, [fired, props.isComplete]);
+    if (fired && !hasSeen()) props.onOpenChange(true);
+    if (props.isOk) markSeen();
+  }, [fired, props.isOk]);
 
   return (
-    <Popout {...props} open={open}>
+    <Popout {...props} onClose={() => {
+        props.onOpenChange(false);
+        markSeen();
+        props.onClose?.();
+      }}
+    >
       {props.children}
     </Popout>
   )

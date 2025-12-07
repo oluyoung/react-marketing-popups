@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import App from './App';
 import PopoutDemo from './demos/PopoutDemo';
 import SlideInDemo from './demos/SlideInDemo';
+import BannerDemo from './demos/BannerDemo';
 
 export { Popout } from "./components/Popout";
 export { Popout as PopoutCore } from "./components/Popout/Popout";
@@ -19,5 +20,6 @@ createRoot(document.getElementById('root')!).render(
     <App />
     <PopoutDemo />
     <SlideInDemo />
+    <BannerDemo />
   </StrictMode>,
 )

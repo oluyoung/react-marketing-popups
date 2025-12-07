@@ -1,16 +1,19 @@
-import React from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import cn from "classnames";
 import styles from "./SlideIn.module.css";
+import { bouncePositionAnimations, fadePositionAnimations, slidePositionAnimations, type SlideInAnimations, } from "../../constants";
+import { useAnimatePresence } from "../../hooks/useAnimatePresence";
+import '../../animate.min.css';
 
 export interface SlideInProps {
   /** Controls open state */
   open: boolean;
 
   /** Direction from which the banner or panel slides in */
-  position?: "top" | "bottom" | "left" | "right";
+  position?: SlideInAnimations;
 
   /** Fired when open state changes (e.g. closing) */
-  onOpenChange?: (open: boolean) => void;
+  onOpenChange: (open: boolean) => void;
 
   /** Fired when open state changes (e.g. closing) */
   onClose?: () => void;
@@ -22,12 +25,17 @@ export interface SlideInProps {
   children: React.ReactNode;
 
   containerClassName?: string;
+
   contentClassName?: string;
 
   elemProps?: {
     containerElProps?: typeof HTMLDivElement,
     contentElProps?: typeof HTMLDivElement,
   }
+
+  animation?: 'slide' | 'fade' | 'bounce';
+
+  isOk?: boolean;
 }
 
 /**
@@ -37,7 +45,7 @@ export interface SlideInProps {
  */
 export const SlideIn: React.FC<SlideInProps> = ({
   open,
-  position = "bottom",
+  position = "left",
   onOpenChange,
   onClose,
   duration = 300,
@@ -45,42 +53,61 @@ export const SlideIn: React.FC<SlideInProps> = ({
   containerClassName = "",
   contentClassName = "",
   elemProps,
+  animation = 'slide',
+  isOk,
 }) => {
-  const [visible, setVisible] = React.useState(open);
-  console.log({ open, position: [styles.rmpSlideinIsOpen, styles.rmpSlideinIsClosed],  })
-  React.useEffect(() => {
-    if (open) setVisible(true);
-  }, [open]);
+  const [animationIn, animationOut] = useMemo(() => {
+    switch (animation) {
+      case 'bounce':
+        return bouncePositionAnimations[position];
+      case 'fade':
+        return fadePositionAnimations[position];
+      case 'slide':
+      default:
+        return slidePositionAnimations[position];
+    }
+  }, [position, animation]);
 
-  const handleTransitionEnd = () => {
-    if (!open) setVisible(false);
-  };
+  const {
+    isMounted,
+    animationClass,
+    handleAnimationEnd,
+  } = useAnimatePresence({ open, animationIn, animationOut });
 
-  const handleClose = () => {
-    onOpenChange?.(false);
+  const handleClose = useCallback(() => {
+    onOpenChange(false);
     onClose?.();
-  };
+  }, [
+    onClose,
+    onOpenChange
+  ]);
 
-  if (!visible && !open) return null;
+  useEffect(() => {
+    if (isMounted && isOk) handleClose();
+  }, [isMounted, handleClose, isOk]);
+
+  if (!isMounted) return null
 
   return (
-    <div
-      className={cn(styles.rmpSlideinContainer, styles[`rmpSlidein-${position}`], open ? styles.rmpSlideinIsOpen : styles.rmpSlideinIsClosed, containerClassName)}
-      style={{ transitionDuration: `${duration}ms` }}
-      onTransitionEnd={handleTransitionEnd}
-      role="dialog"
-      aria-modal="true"
-      {...(elemProps && elemProps.containerElProps ? elemProps.containerElProps : {})}
-    >
-      <div className={cn(styles.rmpSlideinContent, contentClassName)} {...(elemProps && elemProps.contentElProps ? elemProps.contentElProps : {})}>
-        {children}
-        <button
-          className={styles.rmpSlideinCloseBtn}
-          onClick={handleClose}
-          aria-label="Close"
-        >
-          ✕
-        </button>
+    <div className={cn(styles.rmpSlideinWrapper, styles[`rmpSlidein-${position}`])}>
+      <div
+        className={cn(styles.rmpSlideinContainer, containerClassName, 'animate__animated', animationClass)}
+        style={{ animationDuration: `${duration}ms` }}
+        onAnimationEnd={handleAnimationEnd}
+        role="dialog"
+        aria-modal="true"
+        {...(elemProps && elemProps.containerElProps ? elemProps.containerElProps : {})}
+      >
+        <div className={cn(styles.rmpSlideinContent, contentClassName)} {...(elemProps && elemProps.contentElProps ? elemProps.contentElProps : {})}>
+          {children}
+          <button
+            className={styles.rmpSlideinCloseBtn}
+            onClick={handleClose}
+            aria-label="Close"
+          >
+            ✕
+          </button>
+        </div>
       </div>
     </div>
   );

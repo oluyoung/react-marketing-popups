@@ -6,24 +6,22 @@ import { Popout, type PopoutProps } from './Popout';
 export const PopoutByInactivity: React.FC<PopoutProps> = (props) => {
   const [fired] = useInactivityTrigger(props.triggerProps);
   const { hasSeen, markSeen } = usePersistence(props.id || 'rmp-popout-inactivity');
-  const [open, setOpen] = React.useState(false);
 
   React.useEffect(() => {
-    if (fired && !hasSeen()) setOpen(true);
-    if (props.isComplete) {
+    if (fired && !hasSeen()) props.onOpenChange(true);
+    if (props.isOk) {
       markSeen();
-      setOpen(false);
+      props.onOpenChange(false);
     }
-  }, [fired, props.isComplete]);
+  }, [fired, props.isOk]);
 
   return (
     <Popout
       {...props}
-      open={open}
       onClose={() => {
-        setOpen(false);
+        props.onOpenChange(false);
         markSeen();
-        if (props.onClose) props.onClose();
+        props.onClose?.();
       }}
     >
       {props.children}

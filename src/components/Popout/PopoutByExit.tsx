@@ -7,24 +7,22 @@ import type { PopoutProps } from './Popout';
 export const PopoutByExit: React.FC<PopoutProps> = (props) => {
   const [fired] = useExitIntentTrigger();
   const { hasSeen, markSeen } = usePersistence(props.id || 'rmp-popout-exit');
-  const [open, setOpen] = React.useState(false);
 
   React.useEffect(() => {
-    if (fired && !hasSeen()) setOpen(true);
-    if (props.isComplete) {
+    if (fired && !hasSeen()) props.onOpenChange(true);
+    if (props.isOk) {
       markSeen();
-      setOpen(false);
+      props.onOpenChange(false);
     }
-  }, [fired, props.isComplete]);
+  }, [fired, hasSeen, markSeen, props, props.isOk]);
 
   return (
     <Popout
       {...props}
-      open={open}
-      onClose={() => { 
-        setOpen(false);
+      open={props.open}
+      onClose={() => {
         markSeen(); 
-        if (props.onClose) props.onClose();
+        props.onOpenChange(false);
       }}
     >
       {props.children}

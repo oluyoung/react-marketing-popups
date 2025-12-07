@@ -12,13 +12,17 @@ export function usePersistence(key: string) {
   const markSeen = useCallback(() => {
     try {
       localStorage.setItem(key, "1");
-    } catch {}
+    } catch {
+      throw new Error('Could not set item please refresh')
+    }
   }, [key]);
 
   const clear = useCallback(() => {
     try {
       localStorage.removeItem(key);
-    } catch {}
+    } catch {
+      throw new Error('Could not clear local storage')
+    }
   }, [key]);
 
   return { hasSeen, markSeen, clear };

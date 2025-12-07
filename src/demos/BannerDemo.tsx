@@ -1,27 +1,33 @@
 import React from "react";
-import { SlideIn } from "../components/SlideIn/SlideIn";
-import type { SlideInAnimations } from "../components/SlideIn/constants";
+import { Banner } from "../components/Banner/Banner";
+import type { SlideInAnimations } from "../constants";
 
-export default function SlideInDemo() {
+export default function BannerDemo() {
   const [open, setOpen] = React.useState(false);
   const [position, setPosition] = React.useState<SlideInAnimations>("left");
+  const [ok, setOk] = React.useState(false);
 
   return (
     <div style={{ padding: "2rem" }}>
-      <h2>SlideIn Demo</h2>
+      <h2>Banner Demo</h2>
       <div style={{ marginBottom: "1rem" }}>
         <select onChange={(e) => setPosition(e.target.value as SlideInAnimations)} value={position}>
+          <option value="top">Top</option>
+          <option value="bottom">Bottom</option>
           <option value="left">Left</option>
           <option value="right">Right</option>
         </select>
       </div>
-      <button onClick={() => setOpen(!open)}>Show Slide-In</button>
+      <button onClick={() => {
+        setOpen(!open);
+        setOk(false);
+      }}>Show Banner</button>
 
-      <SlideIn open={open} position={position} onOpenChange={setOpen}>
+      <Banner id={`demo-banner-${position}`} open={open} position={position} onOpenChange={setOpen} isOk={ok}>
         <h3>Subscribe to Our Newsletter</h3>
         <p>Get updates, deals, and insider tips — straight to your inbox.</p>
-        <button>Submit</button>
-      </SlideIn>
+        <button onClick={() => setOk(true)}>Set Ok</button>
+      </Banner>
     </div>
   );
 }
