@@ -1,16 +1,27 @@
 import React, { useCallback, useEffect, useMemo } from "react";
 import cn from "classnames";
 import styles from "./SlideIn.module.css";
-import { bouncePositionAnimations, fadePositionAnimations, slidePositionAnimations, type SlideInAnimations, } from "../../constants";
+import {
+  bouncePositionAnimations,
+  fadePositionAnimations,
+  slidePositionAnimations,
+  type AnimationPositions,
+  type Animations,
+  type PopoutAnimationPositions,
+  type Trirggers
+} from "../../constants";
 import { useAnimatePresence } from "../../hooks/useAnimatePresence";
 import '../../animate.min.css';
 
 export interface SlideInProps {
+  /** Identifier for the slide in when using persistence */
+  id: string;
+
   /** Controls open state */
   open: boolean;
 
   /** Direction from which the banner or panel slides in */
-  position?: SlideInAnimations;
+  position?: Omit<AnimationPositions, 'top' | 'bottom'>;
 
   /** Fired when open state changes (e.g. closing) */
   onOpenChange: (open: boolean) => void;
@@ -29,19 +40,24 @@ export interface SlideInProps {
   contentClassName?: string;
 
   elemProps?: {
+    wrapperElProps?: typeof HTMLDivElement,
     containerElProps?: typeof HTMLDivElement,
     contentElProps?: typeof HTMLDivElement,
   }
 
-  animation?: 'slide' | 'fade' | 'bounce';
+  animation?: Animations;
 
   isOk?: boolean;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  triggerProps?: any;
+
+  trigger?: Trirggers;
 }
 
 /**
  * SlideIn Component
- * Smoothly animates content from top, bottom, left, or right edges.
- * Top/bottom are full-width banners; left/right are fixed smaller-width panels.
+ * Smoothly animates content from left or right edges.
  */
 export const SlideIn: React.FC<SlideInProps> = ({
   open,
@@ -59,12 +75,12 @@ export const SlideIn: React.FC<SlideInProps> = ({
   const [animationIn, animationOut] = useMemo(() => {
     switch (animation) {
       case 'bounce':
-        return bouncePositionAnimations[position];
+        return bouncePositionAnimations[position as PopoutAnimationPositions];
       case 'fade':
-        return fadePositionAnimations[position];
+        return fadePositionAnimations[position as PopoutAnimationPositions];
       case 'slide':
       default:
-        return slidePositionAnimations[position];
+        return slidePositionAnimations[position as AnimationPositions];
     }
   }, [position, animation]);
 
@@ -89,7 +105,7 @@ export const SlideIn: React.FC<SlideInProps> = ({
   if (!isMounted) return null
 
   return (
-    <div className={cn(styles.rmpSlideinWrapper, styles[`rmpSlidein-${position}`])}>
+    <div className={cn(styles.rmpSlideinWrapper, styles[`rmpSlidein-${position}`])} {...(elemProps && elemProps.wrapperElProps ? elemProps.wrapperElProps : {})}>
       <div
         className={cn(styles.rmpSlideinContainer, containerClassName, 'animate__animated', animationClass)}
         style={{ animationDuration: `${duration}ms` }}

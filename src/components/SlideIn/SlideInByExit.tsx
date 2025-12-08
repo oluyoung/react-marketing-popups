@@ -1,12 +1,11 @@
 import React from 'react';
-import { Popout } from '.';
 import { useExitIntentTrigger } from '../../hooks/useExitIntentTrigger';
 import { usePersistence } from '../../hooks/usePersistence';
-import type { PopoutProps } from './Popout';
+import { SlideIn , type SlideInProps } from './SlideIn';
 
-export const PopoutByExit: React.FC<PopoutProps> = (props) => {
+export const SlideInByExit: React.FC<SlideInProps> = (props) => {
   const [fired] = useExitIntentTrigger();
-  const { hasSeen, markSeen } = usePersistence(props.id || 'rmp-popout-exit');
+  const { hasSeen, markSeen } = usePersistence(props.id || 'rmp-slideIn-exit');
 
   React.useEffect(() => {
     if (fired && !hasSeen()) props.onOpenChange(true);
@@ -16,8 +15,8 @@ export const PopoutByExit: React.FC<PopoutProps> = (props) => {
   }, [fired, props.isOk]);
 
   return (
-    <Popout {...props}>
+    <SlideIn {...props}>
       {props.children}
-    </Popout>
+    </SlideIn>
   );
 };

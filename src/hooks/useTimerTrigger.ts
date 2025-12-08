@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export function useTimerTrigger(ms: number, enabled = true) {
+export function useTimerTrigger(ms = 3000, enabled = true) {
   const [fired, setFired] = useState(false);
   
   useEffect(() => {

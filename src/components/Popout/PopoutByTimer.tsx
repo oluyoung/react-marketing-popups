@@ -4,22 +4,18 @@ import { Popout, type PopoutProps } from './Popout';
 import { usePersistence } from '../../hooks/usePersistence';
 
 export const PopoutByTimer: React.FC<PopoutProps> = (props) => {
-  const [fired] = useTimerTrigger(props.triggerProps);
+  const [fired] = useTimerTrigger(props.triggerProps.ms, props.triggerProps.enabled);
   const { hasSeen, markSeen } = usePersistence(props.id || 'rmp-popout-timer');
 
   React.useEffect(() => {
     if (fired && !hasSeen()) props.onOpenChange(true);
-  }, [fired, hasSeen]);
+    if (props.isOk) markSeen();
+    if (fired && !props.open) markSeen();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fired, props.isOk]);
 
   return (
-    <Popout
-      {...props}
-      onClose={() => {
-        props.onOpenChange(false);
-        markSeen();
-        props.onClose?.();
-      }}
-    >
+    <Popout {...props}>
       {props.children}
     </Popout>
   );

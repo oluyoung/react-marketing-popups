@@ -1,34 +1,44 @@
 import React, { useCallback, useEffect, useMemo, useRef } from "react";
-// import { useSlideInVisibility } from "../../hooks/useSlideInVisibility";
 import cn from 'classnames';
-import styles from "./Banner.module.css";
-// import { useAnimationClass } from "../../hooks/useAnimationClass";
-import { bouncePositionAnimations, fadePositionAnimations, slidePositionAnimations, type SlideInAnimations } from "../../constants";
-import '../../animate.min.css';
-// import { useAnimationVisibility } from "../../hooks/useAnimationVisibility";
+import {
+  bouncePositionAnimations,
+  fadePositionAnimations,
+  slidePositionAnimations,
+  type AnimationPositions,
+  type Animations,
+  type PopoutAnimationPositions,
+  type Trirggers
+} from "../../constants";
 import { useAnimatePresence } from "../../hooks/useAnimatePresence";
+import styles from "./Banner.module.css";
+import '../../animate.min.css';
 
 export interface BannerProps {
   id: string;
   open: boolean;
-  position?: SlideInAnimations;
+  position?: AnimationPositions;
   onOpenChange: (open: boolean) => void;
   onClose?: () => void;
   duration?: number;
   children: React.ReactNode;
-  animation?: "slide" | "bounce" | "fade";
+  animation?: Animations;
   containerClassName?: string;
   contentClassName?: string;
   elemProps?: {
     containerElProps?: typeof HTMLDivElement,
     contentElProps?: typeof HTMLDivElement,
   }
-  trigger?: 'timer' | 'exit' | 'scroll' | 'inactivity' | '';
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   triggerProps?: any;
+  trigger?: Trirggers;
   isOk?: boolean;
 }
 
+/**
+ * Banner Component
+ * Smoothly animates content from top, bottom, left or right edges.
+ * Top/bottom are fixed full-width banners; left/right are fixed full screen-height smaller-width panels.
+ */
 export const Banner: React.FC<BannerProps> = ({
   id,
   open,
@@ -40,16 +50,17 @@ export const Banner: React.FC<BannerProps> = ({
   containerClassName,
   contentClassName = '',
   onClose,
-  isOk
+  isOk,
+  elemProps
 }) => {
   const bannerRef = useRef<HTMLDivElement | null>(null);
 
   const [animationIn, animationOut] = useMemo(() => {
     switch (animation) {
       case 'bounce':
-        return bouncePositionAnimations[position];
+        return bouncePositionAnimations[position as PopoutAnimationPositions];
       case 'fade':
-        return fadePositionAnimations[position];
+        return fadePositionAnimations[position as PopoutAnimationPositions];
       case 'slide':
       default:
         return slidePositionAnimations[position];
@@ -85,8 +96,9 @@ export const Banner: React.FC<BannerProps> = ({
       role="dialog"
       aria-modal="true"
       ref={bannerRef}
+      {...(elemProps && elemProps.containerElProps ? elemProps.containerElProps : {})}
     >
-      <div className={cn(styles.rmpBannerContent, contentClassName)}>
+      <div className={cn(styles.rmpBannerContent, contentClassName)} {...(elemProps && elemProps.contentElProps ? elemProps.contentElProps : {})}>
         {children}
         <button className={styles.rmpBannerCloseBtn} onClick={handleClose} aria-label="Close">
           ✕
@@ -95,10 +107,3 @@ export const Banner: React.FC<BannerProps> = ({
     </div>
   );
 };
-
-/**
- when open, mount && display
- when visible, slide out
- when !visible, slide in
- when !open, dismount
- */

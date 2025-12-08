@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export function useScrollTrigger({ percent = 50 }: { percent?: number } = {}) {
+export function useScrollTrigger(percent = 50) {
   const [fired, setFired] = useState(false);
 
   useEffect(() => {

@@ -1,0 +1,11 @@
+.content {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.scrolled {
+  position: relative;
+  top: auto;
+  transform: translateY(0);
+}

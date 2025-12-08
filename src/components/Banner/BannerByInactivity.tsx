@@ -1,11 +1,11 @@
-import React from 'react'
-import { useTimerTrigger } from '../../hooks/useTimerTrigger';
+import React from 'react';
+import { useInactivityTrigger } from '../../hooks/useInactivityTrigger'
 import { usePersistence } from '../../hooks/usePersistence';
 import { Banner, type BannerProps } from './Banner';
 
-export const BannerByTimer: React.FC<BannerProps> = (props) => {
-  const [fired] = useTimerTrigger(props.triggerProps.ms, props.triggerProps.enabled);
-  const { hasSeen, markSeen } = usePersistence(props.id || 'rmp-banner-timer');
+export const BannerByInactivity: React.FC<BannerProps> = (props) => {
+  const [fired] = useInactivityTrigger(props.triggerProps);
+  const { hasSeen, markSeen } = usePersistence(props.id || 'rmp-banner-inactivity');
 
   React.useEffect(() => {
     if (fired && !hasSeen()) props.onOpenChange(true);

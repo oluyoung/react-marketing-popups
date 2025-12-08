@@ -1,17 +1,17 @@
 import React from "react";
 import { Banner } from "../components/Banner/Banner";
-import type { SlideInAnimations } from "../constants";
+import type { AnimationPositions } from "../constants";
 
 export default function BannerDemo() {
   const [open, setOpen] = React.useState(false);
-  const [position, setPosition] = React.useState<SlideInAnimations>("left");
+  const [position, setPosition] = React.useState<AnimationPositions>("left");
   const [ok, setOk] = React.useState(false);
 
   return (
     <div style={{ padding: "2rem" }}>
       <h2>Banner Demo</h2>
       <div style={{ marginBottom: "1rem" }}>
-        <select onChange={(e) => setPosition(e.target.value as SlideInAnimations)} value={position}>
+        <select onChange={(e) => setPosition(e.target.value as AnimationPositions)} value={position}>
           <option value="top">Top</option>
           <option value="bottom">Bottom</option>
           <option value="left">Left</option>

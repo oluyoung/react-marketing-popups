@@ -1,22 +1,22 @@
 import React from 'react'
 import { useScrollTrigger } from '../../hooks/useScrollTrigger'
 import { usePersistence } from '../../hooks/usePersistence';
-import { Popout, type PopoutProps } from './Popout';
+import { SlideIn, type SlideInProps } from './SlideIn';
 
-export const PopoutByScroll: React.FC<PopoutProps> = (props) => {
+export const SlideInByScroll: React.FC<SlideInProps> = (props) => {
   const [fired] = useScrollTrigger(props.triggerProps);
-  const { hasSeen, markSeen } = usePersistence(props.id || 'rmp-popout-inactivity');
+  const { hasSeen, markSeen } = usePersistence(props.id || 'rmp-slideIn-scroll');
 
   React.useEffect(() => {
     if (fired && !hasSeen()) props.onOpenChange(true);
-    if (fired && !props.open) markSeen();
     if (props.isOk) markSeen();
+    if (fired && !props.open) markSeen();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fired, props.isOk]);
 
   return (
-    <Popout {...props}>
+    <SlideIn {...props}>
       {props.children}
-    </Popout>
+    </SlideIn>
   )
 }

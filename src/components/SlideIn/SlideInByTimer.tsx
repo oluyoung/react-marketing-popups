@@ -1,11 +1,11 @@
 import React from 'react'
 import { useTimerTrigger } from '../../hooks/useTimerTrigger';
 import { usePersistence } from '../../hooks/usePersistence';
-import { Banner, type BannerProps } from './Banner';
+import { SlideIn, type SlideInProps } from './SlideIn';
 
-export const BannerByTimer: React.FC<BannerProps> = (props) => {
+export const SlideInByTimer: React.FC<SlideInProps> = (props) => {
   const [fired] = useTimerTrigger(props.triggerProps.ms, props.triggerProps.enabled);
-  const { hasSeen, markSeen } = usePersistence(props.id || 'rmp-banner-timer');
+  const { hasSeen, markSeen } = usePersistence(props.id || 'rmp-slideIn-timer');
 
   React.useEffect(() => {
     if (fired && !hasSeen()) props.onOpenChange(true);
@@ -15,8 +15,8 @@ export const BannerByTimer: React.FC<BannerProps> = (props) => {
   }, [fired, props.isOk]);
 
   return (
-    <Banner {...props}>
+    <SlideIn {...props}>
       {props.children}
-    </Banner>
+    </SlideIn>
   )
 }

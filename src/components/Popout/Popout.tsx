@@ -1,4 +1,5 @@
 import React, {
+  useCallback,
   useEffect,
   useId,
   useMemo
@@ -6,29 +7,33 @@ import React, {
 import { useFocusTrap } from "../../hooks/useFocusTrap";
 import styles from "./Popout.module.css";
 import cn from 'classnames';
-import '../../animate.min.css';
 import { useAnimatePresence } from "../../hooks/useAnimatePresence";
-import { zoomPositionAnimations } from "../../constants";
+import { bouncePositionAnimations, fadePositionAnimations, zoomPositionAnimations, type PopoutAnimationPositions, type PopoutAnimations, type Trirggers } from "../../constants";
+import '../../animate.min.css';
 
 export type PopoutProps = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onClose?: () => void;
-  ariaLabel?: string;
   closeOnOverlay?: boolean;
   lockScroll?: boolean;
   children?: React.ReactNode;
-  id?: string;
+  id: string;
   overlayClassName?: string;
   contentClassName?: string;
   elemProps?: {
     overlayElProps?: typeof HTMLDivElement,
     containerElProps?: typeof HTMLDivElement,
   }
-  animation?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  triggerProps?: any;
+  trigger?: Trirggers;
+  animation?: PopoutAnimations;
   duration?: number;
   isOk?: boolean;
 };
+
+const position = 'center' as PopoutAnimationPositions;
 
 export const Popout: React.FC<PopoutProps> = ({
   onOpenChange,
@@ -47,17 +52,23 @@ export const Popout: React.FC<PopoutProps> = ({
   const uid = useId();
   const body = typeof document !== "undefined" ? document.body : null;
   const containerRef = useFocusTrap<HTMLDivElement>(open);
-  
+
   const [animationIn, animationOut] = useMemo(() => {
-    switch(animation) {
+    switch (animation) {
+      case 'bounce':
+        return bouncePositionAnimations[position];
+      case 'fade':
+        return fadePositionAnimations[position];
       case 'zoom':
       default:
-        return zoomPositionAnimations['center'];
+        return zoomPositionAnimations[position];
     }
   }, [animation])
   const { isMounted, animationClass, handleAnimationEnd } = useAnimatePresence({ open, animationIn, animationOut })
 
-  const handleClose = () => {}
+  const handleClose = useCallback(() => {
+    onOpenChange(false);
+  }, [onOpenChange]);
 
   useEffect(() => {
     if (!open || !body) return;
@@ -66,11 +77,11 @@ export const Popout: React.FC<PopoutProps> = ({
     return () => {
       if (lockScroll) document.body.style.overflow = originalOverflow;
     };
-  }, []);
+  }, [open, lockScroll, body]);
 
   useEffect(() => {
     if (isMounted && isOk) handleClose();
-  }, [isMounted, handleClose, isOk]);
+  }, [handleClose, isMounted, isOk]);
 
   if (!isMounted || !body) return null;
 
@@ -82,14 +93,14 @@ export const Popout: React.FC<PopoutProps> = ({
       aria-modal="true"
       onMouseDown={(e) => {
         if (closeOnOverlay && e.target === e.currentTarget) {
-          onOpenChange?.(false);
+          handleClose();
         };
       }}
       {...(elemProps && elemProps.overlayElProps ? elemProps.overlayElProps : {})}
     >
       <div className={styles.rmpPopoutWrapper}>
         <div
-          className={cn('animate__animated', styles.rmpContent, contentClassName, animationClass)}
+          className={cn(styles.rmpContent, contentClassName, 'animate__animated', animationClass)}
           style={{ animationDuration: `${duration}ms` }}
           ref={containerRef}
           onAnimationEnd={handleAnimationEnd}
@@ -101,9 +112,7 @@ export const Popout: React.FC<PopoutProps> = ({
             type="button"
             aria-label="Close"
             className={styles.nlpClose}
-            onClick={() => {
-              onOpenChange?.(false);
-            }}
+            onClick={handleClose}
           >
             ×
           </button>

@@ -1,11 +1,11 @@
 import React from 'react';
 import { useInactivityTrigger } from '../../hooks/useInactivityTrigger'
 import { usePersistence } from '../../hooks/usePersistence';
-import { Popout, type PopoutProps } from './Popout';
+import { SlideIn, type SlideInProps } from './SlideIn';
 
-export const PopoutByInactivity: React.FC<PopoutProps> = (props) => {
+export const SlideInByInactivity: React.FC<SlideInProps> = (props) => {
   const [fired] = useInactivityTrigger(props.triggerProps);
-  const { hasSeen, markSeen } = usePersistence(props.id || 'rmp-popout-inactivity');
+  const { hasSeen, markSeen } = usePersistence(props.id || 'rmp-slideIn-inactivity');
 
   React.useEffect(() => {
     if (fired && !hasSeen()) props.onOpenChange(true);
@@ -15,8 +15,8 @@ export const PopoutByInactivity: React.FC<PopoutProps> = (props) => {
   }, [fired, props.isOk]);
 
   return (
-    <Popout {...props}>
+    <SlideIn {...props}>
       {props.children}
-    </Popout>
+    </SlideIn>
   )
 }

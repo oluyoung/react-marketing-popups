@@ -1,27 +1,32 @@
 import React from 'react';
 import { Popout } from '../components/Popout';
-import { useTimerTrigger } from '../hooks/useTimerTrigger'
-import { useInactivityTrigger } from '../hooks/useInactivityTrigger'
-import { useScrollTrigger } from '../hooks/useScrollTrigger'
-import { useExitIntentTrigger } from '../hooks/useExitIntentTrigger'
-import { usePersistence } from '../hooks/usePersistence'
+import type { Animations } from '../constants';
 
 const PopoutDemo = () => {
-  // const [timeFired] = useTimerTrigger(3000);
-  const [fired] = useExitIntentTrigger();
-  const { hasSeen, markSeen } = usePersistence("nlp:v1");
   const [open, setOpen] = React.useState(false);
-
-  React.useEffect(() => {
-    if (fired && !hasSeen()) setOpen(true);
-  }, [fired]);
+  const [ok, setOk] = React.useState(false);
+  const [animation, setAnimation] = React.useState('bounce');
 
   return (
-    <Popout open={open} onOpenChange={(next: boolean) => { setOpen(next); if (!next) markSeen(); }}>
-      <div>
-        <h1>This is a popup content</h1>
+    <div style={{ padding: "2rem" }}>
+      <h2>SlideIn Demo</h2>
+      <div style={{ marginBottom: "1rem" }}>
+        <select onChange={(e) => setAnimation(e.target.value as Animations)} value={animation}>
+          <option value="zoom">Zoom</option>
+          <option value="right">Right</option>
+        </select>
       </div>
-    </Popout>
+      <button onClick={() => {
+        setOpen(!open);
+        setOk(false);
+      }}>Show Popout</button>
+
+      <Popout id="rmp-popout" open={open} onOpenChange={(next: boolean) => { setOpen(next); }} isOk={ok}>
+        <div>
+          <h1>This is a popup content</h1>
+        </div>
+      </Popout>
+    </div>
   )
 }
 
