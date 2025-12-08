@@ -9,9 +9,8 @@ import '../../animate.min.css';
 /**
  * Banner Component
  * Smoothly animates content into view
- * Choose a trigger for the desired action
- * TODO: Choose a position for it to come in from - center
- * TODO: Choose an animation for it to use - fadeIn
+ * Choose a trigger for the desired trigger
+ * Choose an animation for the desired animation
  */
 export const Banner = ({
   trigger,

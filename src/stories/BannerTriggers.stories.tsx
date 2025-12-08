@@ -41,7 +41,7 @@ export const ExitIntent: Story = {
 export const ScrollTrigger: Story = {
   args: {
     trigger: 'scroll',
-    triggerProps: { percent: 30 },
+    triggerProps: 30,
   },
   render: (args) => <BannerTriggerView {...args} />
 };

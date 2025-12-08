@@ -4,6 +4,7 @@ import { reset } from './utils/reset-persistence';
 import { getInstruction } from './utils';
 import cn from 'classnames';
 import styles from './BannerTriggerVIew.module.css';
+import { PopoutCenter } from '../templates/popout/Center';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const PopoutTriggerView = (args: any) => {
@@ -48,10 +49,7 @@ const PopoutTriggerView = (args: any) => {
         }}
         isOk={ok}
       >
-        <div style={{ display: 'flex', flexDirection: 'column', flexWrap: 'wrap', justifyContent: 'center', gap: 4 }}>
-          <h2>Popout Content</h2>
-          <button onClick={() => setOk(true)}>OK</button>
-        </div>
+        <PopoutCenter onOk={() => setOk(true)} />
       </Popout>
     </div>
   );

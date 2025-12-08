@@ -9,7 +9,6 @@
 }
 
 .rmpSlideinContainer {
-  background: #ffffff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   overflow-x: hidden;
   overflow-y: auto;
@@ -29,15 +28,12 @@
 .rmpSlideinContent {
   position: relative;
   width: 100%;
-  padding: 1.25rem;
-  box-sizing: border-box;
-  text-align: center;
 }
 
 .rmpSlideinCloseBtn {
   position: absolute;
-  top: 0.5rem;
-  right: 0.75rem;
+  top: 8px;
+  right: 8px;
   border: none;
   background: transparent;
   font-size: 1.25rem;
@@ -45,24 +41,20 @@
   color: #444;
 }
 
-.rmpSlideinIsOpen {
-  transform: translate(0, 0);
-  opacity: 1;
+.rmpSlidein-left .rmpSlideinCloseBtn {
+  left: auto;
 }
 
-.rmpSlideinIsClosed {
-  opacity: 0;
+.rmpSlidein-right .rmpSlideinCloseBtn {
+  left: 8px;
+  right: auto;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 640px) {
   .rmpSlidein-left,
   .rmpSlidein-right {
     width: 100%;
     max-width: none;
   }
 
-  .rmpSlideinContent {
-    padding: 1rem;
-    font-size: 0.9rem;
-  }
 }

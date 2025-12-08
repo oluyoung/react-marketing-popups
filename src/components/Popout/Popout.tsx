@@ -98,7 +98,6 @@ export const Popout: React.FC<PopoutProps> = ({
       }}
       {...(elemProps && elemProps.overlayElProps ? elemProps.overlayElProps : {})}
     >
-      <div className={styles.rmpPopoutWrapper}>
         <div
           className={cn(styles.rmpContent, contentClassName, 'animate__animated', animationClass)}
           style={{ animationDuration: `${duration}ms` }}
@@ -111,13 +110,12 @@ export const Popout: React.FC<PopoutProps> = ({
           <button
             type="button"
             aria-label="Close"
-            className={styles.nlpClose}
+            className={styles.rmpClose}
             onClick={handleClose}
           >
             ×
           </button>
         </div>
-      </div>
     </div>
   );
 };

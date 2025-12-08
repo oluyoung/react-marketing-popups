@@ -1,0 +1,44 @@
+.container {
+  background: linear-gradient(to right, #2563eb, #06b6d4);
+  color: white;
+  padding: 1rem 1.5rem;
+}
+
+.content {
+  max-width: 80rem;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.text {
+  flex: 1;
+  min-width: 200px;
+}
+
+.message {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.highlight {
+  font-weight: 600;
+}
+
+.cta {
+  background: white;
+  color: #2563eb;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.2s;
+}
+
+.cta:hover {
+  background: #f3f4f6;
+}

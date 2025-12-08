@@ -4,13 +4,33 @@ import { reset } from './utils/reset-persistence';
 import { getInstruction } from './utils';
 import cn from 'classnames';
 import styles from './BannerTriggerVIew.module.css';
+import { BannerTop } from '../templates/banner/Top';
+import { BannerLeft } from '../templates/banner/Left';
+import { BannerRight } from '../templates/banner/Right';
+import { BannerBottom } from '../templates/banner/Bottom';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const BannerTriggerView = (args: any) => {
   const [open, setOpen] = React.useState(false);
   const [ok, setOk] = React.useState(false);
+  
+  const handleOk = () => setOk(true);
 
-  const instructions = useMemo(() => getInstruction(args.trigger, args.triggerProps, 'Banner'), [args.trigger, args.triggerProps])
+  const instructions = useMemo(() => getInstruction(args.trigger, args.triggerProps, 'Banner'), [args.trigger, args.triggerProps]);
+
+  const Content = useMemo(() => {
+    switch (args.position) {
+      case 'top':
+        return <BannerTop onOk={handleOk} />
+      case 'right':
+        return <BannerRight onOk={handleOk} />
+      case 'left':
+        return <BannerLeft onOk={handleOk} />
+      case 'bottom':
+      default:
+        return <BannerBottom onOk={handleOk} />;
+    }
+  }, [args.position]);
 
   return (
     <div style={{ width: '90vw', height: '400px', position: 'relative', padding: '20px' }}>
@@ -48,10 +68,7 @@ const BannerTriggerView = (args: any) => {
         }}
         isOk={ok}
       >
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 4 }}>
-          <h2>Banner Content</h2>
-          <button onClick={() => setOk(true)}>OK</button>
-        </div>
+        {Content}
       </Banner>
     </div>
   );

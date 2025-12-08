@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { Popout } from '../components/Popout/Popout';
 import { addDisableToProps } from './utils/add-disabled-to-props';
+import { PopoutCenter } from '../templates/popout/Center';
 
 const disabledProps = ['open', 'onOpenChange', 'onClose', 'children', 'elemProps', 'triggerProps', 'trigger', 'isOk'];
 
@@ -11,7 +12,7 @@ const meta: Meta<typeof Popout> = {
   component: Popout,
   args: {
     duration: 300,
-    animation: 'fade',
+    animation: 'zoom',
     closeOnOverlay: true,
   },
   argTypes: {
@@ -19,8 +20,8 @@ const meta: Meta<typeof Popout> = {
       control: { type: 'range', min: 300, max: 10000, step: 100 }
     },
     animation: {
-      control: 'select',
-      options: ['fade', 'slide', 'bounce']
+      control: 'radio',
+      options: ['zoom', 'fade', 'bounce']
     },
     ...addDisableToProps(disabledProps)
   },
@@ -36,7 +37,7 @@ export const PopoutCore: Story = {
 
     return (
       <div style={{ width: '90vw', height: 400 }}>
-        <button onClick={() => {setOpen(true); setOk(false); }}>Show Me</button>
+        <button onClick={() => { setOk(false); setOpen(true); }}>Show Me</button>
 
         <Popout
           {...args}
@@ -45,10 +46,7 @@ export const PopoutCore: Story = {
           onOpenChange={setOpen}
           isOk={ok}
         >
-          <div>
-            <h4>This is popup content</h4>
-            <button onClick={() => setOk(true)}>OK</button>
-          </div>
+          <PopoutCenter onOk={() => setOk(true)} />
         </Popout>
       </div>
     );

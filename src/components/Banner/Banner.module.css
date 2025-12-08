@@ -1,10 +1,8 @@
 .rmpBanner {
   position: fixed;
   z-index: 9999;
-  background: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   transition-property: all;
-  /* opacity: 0; */
   width: 100%;
 }
 
@@ -39,19 +37,32 @@
 .rmpBannerContent {
   position: relative;
   width: 100%;
-  padding: 1.25rem;
-  text-align: center;
-  width: 100%;
   box-sizing: border-box;
+  height: 100%;
 }
 
 .rmpBannerCloseBtn {
   position: absolute;
-  top: 0.5rem;
-  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 8px;
   border: none;
   background: transparent;
   font-size: 1.25rem;
   cursor: pointer;
   color: #444;
+}
+
+.rmpBanner-left .rmpBannerCloseBtn {
+  top: 8px;
+  transform: translateY(0);
+  right: 8px;
+  left: auto;
+}
+
+.rmpBanner-right .rmpBannerCloseBtn {
+  top: 8px;
+  transform: translateY(0);
+  left: 8px;
+  right: auto;
 }

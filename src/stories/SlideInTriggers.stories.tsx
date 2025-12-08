@@ -17,14 +17,14 @@ const meta: Meta<typeof SlideIn> = {
   },
   argTypes: {
     position: { 
-      control: 'select',
+      control: 'radio',
       options: ['left', 'right']
     },
     duration: {
       control: { type: 'range', min: 300, max: 10000, step: 100 }
     },
     animation: {
-      control: 'select',
+      control: 'radio',
       options: ['slide', 'fade', 'bounce']
     },
     ...addDisableToProps(disabledProps)
@@ -50,10 +50,10 @@ export const ExitIntent: Story = {
   render: (args) => <SlideInTriggerView {...args} />
 };
 
-export const ScrollTrigger: Story = {
+export const Scroll: Story = {
   args: {
     trigger: 'scroll',
-    triggerProps: { percent: 30 },
+    triggerProps: 30,
   },
   render: (args) => <SlideInTriggerView {...args} />
 };

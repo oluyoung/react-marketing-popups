@@ -13,24 +13,22 @@
   height: 100%;
 }
 
-.rmpPopoutWrapper {
-
-}
-
 .rmpContent {
   position: relative;
   max-width: 520px;
-  width: calc(100% - 40px);
-  background: #fff;
-  border-radius: 10px;
-  padding: 20px;
   box-shadow: 0 24px 48px rgba(0,0,0,0.3);
+  
+}
+@media all and (max-width: 640px) {
+  .rmpContent {
+    width: calc(100% - 40px);
+  }
 }
 
 .rmpClose {
   position: absolute;
   top: 8px;
-  right: 10px;
+  right: 8px;
   border: 0;
   background: transparent;
   font-size: 24px;

@@ -24,6 +24,7 @@ export interface BannerProps {
   animation?: Animations;
   containerClassName?: string;
   contentClassName?: string;
+  closeBtnClassname?: string;
   elemProps?: {
     containerElProps?: typeof HTMLDivElement,
     contentElProps?: typeof HTMLDivElement,
@@ -48,7 +49,8 @@ export const Banner: React.FC<BannerProps> = ({
   children,
   animation = "slide",
   containerClassName,
-  contentClassName = '',
+  contentClassName,
+  closeBtnClassname,
   onClose,
   isOk,
   elemProps
@@ -100,7 +102,7 @@ export const Banner: React.FC<BannerProps> = ({
     >
       <div className={cn(styles.rmpBannerContent, contentClassName)} {...(elemProps && elemProps.contentElProps ? elemProps.contentElProps : {})}>
         {children}
-        <button className={styles.rmpBannerCloseBtn} onClick={handleClose} aria-label="Close">
+        <button className={cn(styles.rmpBannerCloseBtn, closeBtnClassname)} onClick={handleClose} aria-label="Close">
           ✕
         </button>
       </div>

@@ -1,0 +1,176 @@
+.container {
+  background: linear-gradient(135deg, #7c3aed, #c026d3);
+  color: white;
+  padding: 2rem;
+  border-radius: 1rem 0 0 1rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  width: 100%;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75em;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.iconWrapper {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  width: 2rem;
+  height: 2rem;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.headerText {
+  display: flex;
+  flex-direction: column;
+}
+
+.badge {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: #e9d5ff;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.title {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.description {
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.625;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.stars {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.starIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: #facc15;
+  stroke: #facc15;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ratingText {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  margin-left: 0.5rem;
+}
+
+.featureBoxes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.featureBox {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.featureHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.featureTitle {
+  font-weight: 600;
+}
+
+.featureLabel {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.featureList {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.featureList div {
+  margin: 0;
+}
+
+.offerBadge {
+  background: linear-gradient(to right, #facc15, #fb923c);
+  color: #1f2937;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  text-align: center;
+}
+
+.offerLabel {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.offerAmount {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.cta {
+  width: 100%;
+  background: white;
+  color: #7c3aed;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.cta:hover {
+  background: #fafaf9;
+}
+
+.disclaimer {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+}

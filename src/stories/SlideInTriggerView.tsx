@@ -4,6 +4,8 @@ import { getInstruction } from './utils';
 import cn from 'classnames';
 import styles from './BannerTriggerVIew.module.css';
 import { SlideIn } from '../components/SlideIn';
+import { SlideInLeft } from '../templates/slideIn/Left';
+import { SlideInRight } from '../templates/slideIn/Right';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const SlideInTriggerView = (args: any) => {
@@ -11,6 +13,18 @@ const SlideInTriggerView = (args: any) => {
   const [ok, setOk] = React.useState(false);
 
   const instructions = useMemo(() => getInstruction(args.trigger, args.triggerProps, 'SlideIn'), [args.trigger, args.triggerProps])
+
+  const handleOk = () => setOk(true);
+
+  const Content = useMemo(() => {
+    switch (args.position) {
+      case 'right':
+        return <SlideInLeft onOk={handleOk} />
+      case 'left':
+      default:
+        return <SlideInRight onOk={handleOk} />;
+    }
+  }, [args.position]);
 
   return (
     <div style={{ width: '90vw', height: '400px', position: 'relative', padding: '20px' }}>
@@ -48,10 +62,7 @@ const SlideInTriggerView = (args: any) => {
         }}
         isOk={ok}
       >
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 4 }}>
-          <h2>SlideIn Content</h2>
-          <button onClick={() => setOk(true)}>OK</button>
-        </div>
+        {Content}
       </SlideIn>
     </div>
   );
