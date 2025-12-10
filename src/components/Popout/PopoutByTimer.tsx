@@ -4,7 +4,7 @@ import { Popout, type PopoutProps } from './Popout';
 import { usePersistence } from '../../hooks/usePersistence';
 
 export const PopoutByTimer: React.FC<PopoutProps> = (props) => {
-  const [fired] = useTimerTrigger(props.triggerProps.ms, props.triggerProps.enabled);
+  const [fired] = useTimerTrigger(props.triggerProps?.ms || 3000, props.triggerProps?.enabled || true);
   const { hasSeen, markSeen } = usePersistence(props.id || 'rmp-popout-timer');
 
   React.useEffect(() => {

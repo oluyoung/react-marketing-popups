@@ -9,32 +9,30 @@ import {
   type AnimationPositions,
   type Animations,
   type PopoutAnimationPositions,
-  type Trirggers
+  type SharedProps,
 } from "../../types";
 import { useAnimatePresence } from "../../hooks/useAnimatePresence";
 import styles from "./Banner.module.css";
 import '../../animate.min.css';
 
-export interface BannerProps {
-  id: string;
-  open: boolean;
+export interface BannerProps extends SharedProps {
+  /** Direction from which the banner comes in */
   position?: AnimationPositions;
-  onOpenChange: (open: boolean) => void;
-  onClose?: () => void;
-  duration?: number;
-  children: React.ReactNode;
+
+  /** Animation used for open and close of component */
   animation?: Animations;
+
+  /** className for root element */
   containerClassName?: string;
+
+  /** className for content container element */
   contentClassName?: string;
-  closeBtnClassname?: string;
+
+  /** Props for root element and content container element */
   elemProps?: {
     containerElProps?: typeof HTMLDivElement,
     contentElProps?: typeof HTMLDivElement,
   }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  triggerProps?: any;
-  trigger?: Trirggers;
-  isOk?: boolean;
 }
 
 /**
@@ -55,6 +53,7 @@ export const Banner: React.FC<BannerProps> = ({
   closeBtnClassname,
   onClose,
   isOk,
+  closeOnOk,
   elemProps
 }) => {
   const bannerRef = useRef<HTMLDivElement | null>(null);
@@ -86,8 +85,8 @@ export const Banner: React.FC<BannerProps> = ({
   ]);
 
   useEffect(() => {
-    if (isMounted && isOk) handleClose();
-  }, [isMounted, handleClose, isOk]);
+    if (isMounted && isOk && closeOnOk) handleClose();
+  }, [isMounted, handleClose, isOk, closeOnOk]);
 
   if (!isMounted) return null;
 

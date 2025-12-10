@@ -10,51 +10,33 @@ import {
   type AnimationPositions,
   type Animations,
   type PopoutAnimationPositions,
-  type Trirggers
+  type SharedProps,
 } from "../../types";
 import { useAnimatePresence } from "../../hooks/useAnimatePresence";
 import '../../animate.min.css';
 
-export interface SlideInProps {
-  /** Identifier for the slide in when using persistence */
-  id: string;
-
-  /** Controls open state */
-  open: boolean;
-
-  /** Direction from which the banner or panel slides in */
+export interface SlideInProps extends SharedProps {
+  /** Direction from which the panel slides in */
   position?: Omit<AnimationPositions, 'top' | 'bottom'>;
 
-  /** Fired when open state changes (e.g. closing) */
-  onOpenChange: (open: boolean) => void;
-
-  /** Fired when open state changes (e.g. closing) */
-  onClose?: () => void;
-
-  /** Duration of slide animation in ms */
-  duration?: number;
-
-  /** Child content (newsletter, text, CTA, etc.) */
-  children: React.ReactNode;
-
+  /** className for root element */
+  wrapperClassName?: string;
+  
+  /** className for container element */
   containerClassName?: string;
 
+  /** className for content container element */
   contentClassName?: string;
 
+  /** Props for root element and content container element */
   elemProps?: {
     wrapperElProps?: typeof HTMLDivElement,
     containerElProps?: typeof HTMLDivElement,
     contentElProps?: typeof HTMLDivElement,
   }
 
+  /** Animation used for open and close of component */
   animation?: Animations;
-
-  isOk?: boolean;
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  triggerProps?: any;
-
-  trigger?: Trirggers;
 }
 
 /**
@@ -68,8 +50,10 @@ export const SlideIn: React.FC<SlideInProps> = ({
   onClose,
   duration = 300,
   children,
+  wrapperClassName,
   containerClassName = "",
   contentClassName = "",
+  closeBtnClassname,
   elemProps,
   animation = 'slide',
   isOk,
@@ -107,7 +91,7 @@ export const SlideIn: React.FC<SlideInProps> = ({
   if (!isMounted) return null
 
   return (
-    <div className={cn(styles.rmpSlideinWrapper, styles[`rmpSlidein-${position}`])} {...(elemProps && elemProps.wrapperElProps ? elemProps.wrapperElProps : {})}>
+    <div className={cn(styles.rmpSlideinWrapper, styles[`rmpSlidein-${position}`], wrapperClassName)} {...(elemProps && elemProps.wrapperElProps ? elemProps.wrapperElProps : {})}>
       <div
         className={cn(styles.rmpSlideinContainer, containerClassName, 'animate__animated', animationClass)}
         style={{ animationDuration: `${duration}ms` }}
@@ -119,7 +103,7 @@ export const SlideIn: React.FC<SlideInProps> = ({
         <div className={cn(styles.rmpSlideinContent, contentClassName)} {...(elemProps && elemProps.contentElProps ? elemProps.contentElProps : {})}>
           {children}
           <button
-            className={styles.rmpSlideinCloseBtn}
+            className={cn(styles.rmpSlideinCloseBtn, closeBtnClassname)}
             onClick={handleClose}
             aria-label="Close"
           >

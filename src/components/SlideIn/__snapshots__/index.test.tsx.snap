@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`SlideIn trigger components > SlideInByExit > snapshot 1`] = `<div />`;
+
+exports[`SlideIn trigger components > SlideInByInactivity > snapshot 1`] = `<div />`;
+
+exports[`SlideIn trigger components > SlideInByScroll > snapshot 1`] = `<div />`;
+
+exports[`SlideIn trigger components > SlideInByTimer > snapshot 1`] = `<div />`;

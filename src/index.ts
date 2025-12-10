@@ -1,9 +1,21 @@
 export { Popout } from "./components/Popout";
 export { type PopoutProps, Popout as PopoutCore } from "./components/Popout/Popout";
+export { PopoutByExit } from './components/Popout/PopoutByExit';
+export { PopoutByInactivity } from './components/Popout/PopoutByInactivity';
+export { PopoutByScroll } from './components/Popout/PopoutByScroll';
+export { PopoutByTimer } from './components/Popout/PopoutByTimer';
 export { Banner } from "./components/Banner";
 export { type BannerProps, Banner as BannerCore } from "./components/Banner/Banner";
+export { BannerByExit } from './components/Banner/BannerByExit';
+export { BannerByInactivity } from './components/Banner/BannerByInactivity';
+export { BannerByScroll } from './components/Banner/BannerByScroll';
+export { BannerByTimer } from './components/Banner/BannerByTimer';
 export { SlideIn } from "./components/SlideIn";
 export { type SlideInProps, SlideIn as SlideInCore } from "./components/SlideIn/SlideIn";
+export { SlideInByExit } from './components/SlideIn/SlideInByExit';
+export { SlideInByInactivity } from './components/SlideIn/SlideInByInactivity';
+export { SlideInByScroll } from './components/SlideIn/SlideInByScroll';
+export { SlideInByTimer } from './components/SlideIn/SlideInByTimer';
 
 export { useTimerTrigger } from "./hooks/useTimerTrigger";
 export { useExitIntentTrigger } from "./hooks/useExitIntentTrigger";

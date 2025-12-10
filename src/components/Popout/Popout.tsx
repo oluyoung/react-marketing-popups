@@ -16,30 +16,31 @@ import {
 import {
   type PopoutAnimationPositions,
   type PopoutAnimations,
-  type Trirggers
+  type SharedProps,
 } from "../../types";
 import '../../animate.min.css';
 
-export type PopoutProps = {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-  onClose?: () => void;
+export interface PopoutProps extends SharedProps {
+  /** close modal on overlay click */
   closeOnOverlay?: boolean;
+
+  /** Sets body's overflow hidden */
   lockScroll?: boolean;
-  children?: React.ReactNode;
-  id: string;
+
+  /** className for overlay element */
   overlayClassName?: string;
+
+  /** className for content container element */
   contentClassName?: string;
+
+  /** Props for overlay element and content container element */
   elemProps?: {
     overlayElProps?: typeof HTMLDivElement,
     containerElProps?: typeof HTMLDivElement,
   }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  triggerProps?: any;
-  trigger?: Trirggers;
+
+  /** Animation used for open and close of component */
   animation?: PopoutAnimations;
-  duration?: number;
-  isOk?: boolean;
 };
 
 const position = 'center' as PopoutAnimationPositions;
@@ -56,7 +57,10 @@ export const Popout: React.FC<PopoutProps> = ({
   elemProps,
   animation = "zoom",
   duration = 400,
-  isOk
+  isOk,
+  closeOnOk,
+  closeBtnClassname,
+  onClose,
 }) => {
   const uid = useId();
   const body = typeof document !== "undefined" ? document.body : null;
@@ -77,7 +81,8 @@ export const Popout: React.FC<PopoutProps> = ({
 
   const handleClose = useCallback(() => {
     onOpenChange(false);
-  }, [onOpenChange]);
+    onClose?.();
+  }, [onOpenChange, onClose]);
 
   useEffect(() => {
     if (!open || !body) return;
@@ -89,8 +94,8 @@ export const Popout: React.FC<PopoutProps> = ({
   }, [open, lockScroll, body]);
 
   useEffect(() => {
-    if (isMounted && isOk) handleClose();
-  }, [handleClose, isMounted, isOk]);
+    if (isMounted && isOk && closeOnOk) handleClose();
+  }, [closeOnOk, handleClose, isMounted, isOk]);
 
   if (!isMounted || !body) return null;
 
@@ -119,7 +124,7 @@ export const Popout: React.FC<PopoutProps> = ({
         <button
           type="button"
           aria-label="Close"
-          className={styles.rmpClose}
+          className={cn(styles.rmpClose, closeBtnClassname)}
           onClick={handleClose}
         >
           ×

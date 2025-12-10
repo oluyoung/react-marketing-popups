@@ -1,0 +1,30 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`SlideIn Component > renders correctly and matches snapshot 1`] = `
+<div>
+  <div
+    class="_rmpSlideinWrapper_aec0e1 _rmpSlidein-left_aec0e1"
+  >
+    <div
+      aria-modal="true"
+      class="_rmpSlideinContainer_aec0e1 animate__animated mockAnimation"
+      role="dialog"
+      style="animation-duration: 300ms;"
+    >
+      <div
+        class="_rmpSlideinContent_aec0e1"
+      >
+        <div>
+          SlideIn Content
+        </div>
+        <button
+          aria-label="Close"
+          class="_rmpSlideinCloseBtn_aec0e1"
+        >
+          ✕
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
