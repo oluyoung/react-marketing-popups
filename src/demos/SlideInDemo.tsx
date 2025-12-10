@@ -1,6 +1,6 @@
 import React from "react";
 import { SlideIn } from "../components/SlideIn/SlideIn";
-import type { AnimationPositions } from "../constants";
+import { type AnimationPositions } from "../types";
 
 export default function SlideInDemo() {
   const [open, setOpen] = React.useState(false);

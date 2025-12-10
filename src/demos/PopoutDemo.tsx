@@ -1,6 +1,6 @@
 import React from 'react';
 import { Popout } from '../components/Popout';
-import type { Animations } from '../constants';
+import type { Animations } from '../types';
 
 const PopoutDemo = () => {
   const [open, setOpen] = React.useState(false);

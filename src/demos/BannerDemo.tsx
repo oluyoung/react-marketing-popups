@@ -1,6 +1,6 @@
 import React from "react";
 import { Banner } from "../components/Banner/Banner";
-import type { AnimationPositions } from "../constants";
+import type { AnimationPositions } from "../types";
 
 export default function BannerDemo() {
   const [open, setOpen] = React.useState(false);

@@ -8,7 +8,16 @@ import { useFocusTrap } from "../../hooks/useFocusTrap";
 import styles from "./Popout.module.css";
 import cn from 'classnames';
 import { useAnimatePresence } from "../../hooks/useAnimatePresence";
-import { bouncePositionAnimations, fadePositionAnimations, zoomPositionAnimations, type PopoutAnimationPositions, type PopoutAnimations, type Trirggers } from "../../constants";
+import {
+  bouncePositionAnimations,
+  fadePositionAnimations,
+  zoomPositionAnimations
+} from "../../constants";
+import {
+  type PopoutAnimationPositions,
+  type PopoutAnimations,
+  type Trirggers
+} from "../../types";
 import '../../animate.min.css';
 
 export type PopoutProps = {
@@ -98,24 +107,24 @@ export const Popout: React.FC<PopoutProps> = ({
       }}
       {...(elemProps && elemProps.overlayElProps ? elemProps.overlayElProps : {})}
     >
-        <div
-          className={cn(styles.rmpContent, contentClassName, 'animate__animated', animationClass)}
-          style={{ animationDuration: `${duration}ms` }}
-          ref={containerRef}
-          onAnimationEnd={handleAnimationEnd}
-          tabIndex={-1}
-          {...(elemProps && elemProps.containerElProps ? elemProps.containerElProps : {})}
+      <div
+        className={cn(styles.rmpContent, contentClassName, 'animate__animated', animationClass)}
+        style={{ animationDuration: `${duration}ms` }}
+        ref={containerRef}
+        onAnimationEnd={handleAnimationEnd}
+        tabIndex={-1}
+        {...(elemProps && elemProps.containerElProps ? elemProps.containerElProps : {})}
+      >
+        {children}
+        <button
+          type="button"
+          aria-label="Close"
+          className={styles.rmpClose}
+          onClick={handleClose}
         >
-          {children}
-          <button
-            type="button"
-            aria-label="Close"
-            className={styles.rmpClose}
-            onClick={handleClose}
-          >
-            ×
-          </button>
-        </div>
+          ×
+        </button>
+      </div>
     </div>
   );
 };

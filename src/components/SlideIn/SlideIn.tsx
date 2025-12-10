@@ -5,11 +5,13 @@ import {
   bouncePositionAnimations,
   fadePositionAnimations,
   slidePositionAnimations,
+} from "../../constants";
+import {
   type AnimationPositions,
   type Animations,
   type PopoutAnimationPositions,
   type Trirggers
-} from "../../constants";
+} from "../../types";
 import { useAnimatePresence } from "../../hooks/useAnimatePresence";
 import '../../animate.min.css';
 
