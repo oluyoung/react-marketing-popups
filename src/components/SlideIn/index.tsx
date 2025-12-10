@@ -5,12 +5,6 @@ import { SlideInByScroll } from './SlideInByScroll';
 import { SlideInByInactivity } from './SlideInByInactivity';
 import '../../animate.min.css';
 
-/**
- * Banner Component
- * Smoothly animates content into view
- * Choose a trigger for the desired trigger
- * Choose an animation for the desired animation
- */
 export const SlideIn = ({
   trigger,
   ...props

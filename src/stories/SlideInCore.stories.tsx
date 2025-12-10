@@ -5,6 +5,7 @@ import { SlideIn } from '../components/SlideIn/SlideIn';
 import { addDisableToProps } from './utils/add-disabled-to-props';
 import { SlideInLeft } from '../templates/slideIn/Left';
 import { SlideInRight } from '../templates/slideIn/Right';
+import styles from './TriggerVIew.module.css';
 
 const disabledProps = ['open', 'onOpenChange', 'onClose', 'children', 'elemProps', 'triggerProps', 'trigger', 'isOk'];
 
@@ -55,14 +56,17 @@ export const SlideInCore: Story = {
     }, [args.position]);
 
     return (
-      <div style={{ width: '90vw', height: 400 }}>
-        <button onClick={() => { setOk(false); setOpen(true); }}>Show Me</button>
+      <div className={styles.container}>
+        <div className={styles.centerContent}>
+          <button onClick={() => { setOk(false); setOpen(true); }} className={styles.showMeBtn}>Show Me</button>
+        </div>
 
         <SlideIn
           {...args}
           open={open}
           onOpenChange={setOpen}
           isOk={ok}
+          closeOnOk
         >
           {Content}
         </SlideIn>

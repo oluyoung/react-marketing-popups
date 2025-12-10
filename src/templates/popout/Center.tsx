@@ -2,7 +2,7 @@ import { useState, type FormEvent } from 'react';
 import styles from './Center.module.css';
 
 export const PopoutCenter = ({ onOk }: { onOk: () => void }) => {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState('you@example.com');
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = (e: FormEvent) => {
@@ -60,7 +60,6 @@ export const PopoutCenter = ({ onOk }: { onOk: () => void }) => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@example.com"
-              required
               className={styles.input}
             />
           </div>

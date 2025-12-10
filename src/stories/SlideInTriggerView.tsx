@@ -2,7 +2,7 @@ import React, { useMemo } from 'react'
 import { reset } from './utils/reset-persistence';
 import { getInstruction } from './utils';
 import cn from 'classnames';
-import styles from './BannerTriggerVIew.module.css';
+import styles from './TriggerVIew.module.css';
 import { SlideIn } from '../components/SlideIn';
 import { SlideInLeft } from '../templates/slideIn/Left';
 import { SlideInRight } from '../templates/slideIn/Right';
@@ -61,6 +61,7 @@ const SlideInTriggerView = (args: any) => {
           setOpen(value);
         }}
         isOk={ok}
+        closeOnOk
       >
         {Content}
       </SlideIn>

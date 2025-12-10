@@ -3,7 +3,7 @@ import { Popout } from '../components/Popout';
 import { reset } from './utils/reset-persistence';
 import { getInstruction } from './utils';
 import cn from 'classnames';
-import styles from './BannerTriggerVIew.module.css';
+import styles from './TriggerVIew.module.css';
 import { PopoutCenter } from '../templates/popout/Center';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -48,6 +48,7 @@ const PopoutTriggerView = (args: any) => {
           setOpen(value);
         }}
         isOk={ok}
+        closeOnOk
       >
         <PopoutCenter onOk={() => setOk(true)} />
       </Popout>

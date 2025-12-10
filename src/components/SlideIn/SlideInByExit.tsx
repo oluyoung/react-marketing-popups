@@ -1,18 +1,17 @@
 import React from 'react';
 import { useExitIntentTrigger } from '../../hooks/useExitIntentTrigger';
-import { usePersistence } from '../../hooks/usePersistence';
-import { SlideIn , type SlideInProps } from './SlideIn';
+import { SlideIn, type SlideInProps } from './SlideIn';
+import { useFiredAndSeenEffect } from '../../hooks/useFiredAndSeen';
 
 export const SlideInByExit: React.FC<SlideInProps> = (props) => {
   const [fired] = useExitIntentTrigger();
-  const { hasSeen, markSeen } = usePersistence(props.id || 'rmp-slideIn-exit');
-
-  React.useEffect(() => {
-    if (fired && !hasSeen()) props.onOpenChange(true);
-    if (props.isOk) markSeen();
-    if (fired && !props.open) markSeen();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fired, props.isOk]);
+  useFiredAndSeenEffect({
+    id: props.id || 'rmp-slideIn-exit',
+    fired,
+    isOk: props.isOk,
+    onOpenChange: props.onOpenChange,
+    open: props.open
+  });
 
   return (
     <SlideIn {...props}>

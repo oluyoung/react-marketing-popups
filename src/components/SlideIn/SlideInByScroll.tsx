@@ -1,19 +1,17 @@
 import React from 'react'
-import { useScrollTrigger } from '../../hooks/useScrollTrigger'
-import { usePersistence } from '../../hooks/usePersistence';
+import { useScrollTrigger } from '../../hooks/useScrollTrigger';
 import { SlideIn, type SlideInProps } from './SlideIn';
+import { useFiredAndSeenEffect } from '../../hooks/useFiredAndSeen';
 
 export const SlideInByScroll: React.FC<SlideInProps> = (props) => {
   const [fired] = useScrollTrigger(props.triggerProps);
-  const { hasSeen, markSeen } = usePersistence(props.id || 'rmp-slideIn-scroll');
-
-  React.useEffect(() => {
-    if (fired && !hasSeen()) props.onOpenChange(true);
-    if (props.isOk) markSeen();
-    if (fired && !props.open) markSeen();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fired, props.isOk]);
-
+  useFiredAndSeenEffect({
+    id: props.id || 'rmp-slideIn-scroll',
+    fired,
+    isOk: props.isOk,
+    onOpenChange: props.onOpenChange,
+    open: props.open
+  });
   return (
     <SlideIn {...props}>
       {props.children}

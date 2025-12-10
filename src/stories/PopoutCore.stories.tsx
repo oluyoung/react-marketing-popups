@@ -4,6 +4,7 @@ import React from 'react';
 import { Popout } from '../components/Popout/Popout';
 import { addDisableToProps } from './utils/add-disabled-to-props';
 import { PopoutCenter } from '../templates/popout/Center';
+import styles from './TriggerVIew.module.css';
 
 const disabledProps = ['open', 'onOpenChange', 'onClose', 'children', 'elemProps', 'triggerProps', 'trigger', 'isOk'];
 
@@ -36,8 +37,10 @@ export const PopoutCore: Story = {
     const [ok, setOk] = React.useState(false);
 
     return (
-      <div style={{ width: '90vw', height: 400 }}>
-        <button onClick={() => { setOk(false); setOpen(true); }}>Show Me</button>
+      <div className={styles.container}>
+        <div className={styles.centerContent}>
+          <button onClick={() => { setOk(false); setOpen(true); }} className={styles.showMeBtn}>Show Me</button>
+        </div>
 
         <Popout
           {...args}
@@ -45,6 +48,7 @@ export const PopoutCore: Story = {
           open={open}
           onOpenChange={setOpen}
           isOk={ok}
+          closeOnOk
         >
           <PopoutCenter onOk={() => setOk(true)} />
         </Popout>

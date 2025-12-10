@@ -1,19 +1,17 @@
 import React from 'react'
 import { useTimerTrigger } from '../../hooks/useTimerTrigger';
-import { usePersistence } from '../../hooks/usePersistence';
 import { Banner, type BannerProps } from './Banner';
+import { useFiredAndSeenEffect } from '../../hooks/useFiredAndSeen';
 
 export const BannerByTimer: React.FC<BannerProps> = (props) => {
   const [fired] = useTimerTrigger(props.triggerProps.ms, props.triggerProps.enabled);
-  const { hasSeen, markSeen } = usePersistence(props.id || 'rmp-banner-timer');
-
-  React.useEffect(() => {
-    if (fired && !hasSeen()) props.onOpenChange(true);
-    if (props.isOk) markSeen();
-    if (fired && !props.open) markSeen();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fired, props.isOk]);
-
+  useFiredAndSeenEffect({
+    id: props.id || 'rmp-banner-timer',
+    fired,
+    isOk: props.isOk,
+    onOpenChange: props.onOpenChange,
+    open: props.open
+  });
   return (
     <Banner {...props}>
       {props.children}

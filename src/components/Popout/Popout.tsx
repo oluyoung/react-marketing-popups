@@ -2,7 +2,8 @@ import React, {
   useCallback,
   useEffect,
   useId,
-  useMemo
+  useMemo,
+  type HTMLAttributes
 } from "react";
 import { useFocusTrap } from "../../hooks/useFocusTrap";
 import styles from "./Popout.module.css";
@@ -35,11 +36,11 @@ export interface PopoutProps extends SharedProps {
 
   /** Props for overlay element and content container element */
   elemProps?: {
-    overlayElProps?: typeof HTMLDivElement,
-    containerElProps?: typeof HTMLDivElement,
+    overlayElProps?: HTMLAttributes<HTMLDivElement>;
+    containerElProps?: HTMLAttributes<HTMLDivElement>;
   }
 
-  /** Animation used for open and close of component */
+  /** Animation effect used for open and close of component */
   animation?: PopoutAnimations;
 };
 
@@ -101,7 +102,7 @@ export const Popout: React.FC<PopoutProps> = ({
 
   return (
     <div
-      id={id ?? `rmp-overlay-${uid}`}
+      id={id ?? `rmp-popout-${uid}`}
       className={cn(styles.rmpOverlay, overlayClassName)}
       role="dialog"
       aria-modal="true"
@@ -127,7 +128,7 @@ export const Popout: React.FC<PopoutProps> = ({
           className={cn(styles.rmpClose, closeBtnClassname)}
           onClick={handleClose}
         >
-          ×
+          ✕
         </button>
       </div>
     </div>

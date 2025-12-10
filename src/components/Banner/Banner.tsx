@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, type HTMLAttributes } from "react";
 import cn from 'classnames';
 import {
   bouncePositionAnimations,
@@ -30,16 +30,11 @@ export interface BannerProps extends SharedProps {
 
   /** Props for root element and content container element */
   elemProps?: {
-    containerElProps?: typeof HTMLDivElement,
-    contentElProps?: typeof HTMLDivElement,
+    containerElProps?: HTMLAttributes<HTMLDivElement>;
+    contentElProps?: HTMLAttributes<HTMLDivElement>;
   }
 }
 
-/**
- * Banner Component
- * Smoothly animates content from top, bottom, left or right edges.
- * Top/bottom are fixed full-width banners; left/right are fixed full screen-height smaller-width panels.
- */
 export const Banner: React.FC<BannerProps> = ({
   id,
   open,

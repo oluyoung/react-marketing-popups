@@ -6,12 +6,6 @@ import { BannerByScroll } from './BannerByScroll';
 import { BannerByInactivity } from './BannerByInactivity';
 import '../../animate.min.css';
 
-/**
- * Banner Component
- * Smoothly animates content into view
- * Choose a trigger for the desired trigger
- * Choose an animation for the desired animation
- */
 export const Banner = ({
   trigger,
   ...props

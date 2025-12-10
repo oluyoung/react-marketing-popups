@@ -33,9 +33,9 @@ export const SlideInLeft = ({ onOk }: { onOk: () => void }) => {
           <div className={styles.priceDetails}>Everything included</div>
         </div>
 
-        <button className={styles.cta}>Start Your Free Trial</button>
+        <button className={styles.cta} onClick={onOk}>Start Your Free Trial</button>
 
-        <p className={styles.disclaimer} onClick={onOk}>
+        <p className={styles.disclaimer}>
           14-day free trial • No credit card required
         </p>
       </div>

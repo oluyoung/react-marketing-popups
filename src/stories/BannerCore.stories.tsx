@@ -8,6 +8,7 @@ import { BannerBottom } from '../templates/banner/Bottom';
 import { BannerLeft } from '../templates/banner/Left';
 import { BannerTop } from '../templates/banner/Top';
 import { BannerRight } from '../templates/banner/Right';
+import styles from './TriggerVIew.module.css';
 
 const disabledProps = ['open', 'onOpenChange', 'onClose', 'children', 'elemProps', 'triggerProps', 'trigger', 'isOk'];
 
@@ -61,9 +62,9 @@ export const BannerCore: Story = {
     }, [args.position]);
 
     return (
-      <div style={{ width: '100%', height: 300, position: 'relative' }}>
-        <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
-          <button onClick={() => { setOk(false); setOpen(true); }} style={{ backgroundColor: 'black', border: '2px solid black', color: 'white', padding: '8px 14px', fontSize: '20px' }}>Show Me</button>
+      <div className={styles.container}>
+        <div className={styles.centerContent}>
+          <button onClick={() => { setOk(false); setOpen(true); }} className={styles.showMeBtn}>Show Me</button>
         </div>
 
         <Banner
@@ -72,6 +73,7 @@ export const BannerCore: Story = {
           open={open}
           onOpenChange={setOpen}
           isOk={ok}
+          closeOnOk
         >
           {Content}
         </Banner>

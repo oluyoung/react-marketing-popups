@@ -5,17 +5,17 @@ export type PopoutAnimations = "zoom" | "fade" | "bounce";
 export type Trirggers = "exit" | "inactivity" | "scroll" | "timer";
 
 export interface SharedProps {
-  /** Called when open state changes (e.g. onOpenChange(true)) */
-  onOpenChange: (open: boolean) => void;
-
-  /** Called when panel closes */
-  onClose?: () => void;
-
   /** Identifier for the slide in when using persistence */
   id: string;
 
   /** Controls open state */
   open: boolean;
+
+  /** Called when open state changes (e.g. onOpenChange(true)) */
+  onOpenChange: (open: boolean) => void;
+
+  /** Called when panel closes */
+  onClose?: () => void;
 
   /** Duration of animation in ms */
   duration?: number;

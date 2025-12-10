@@ -17,12 +17,10 @@ describe("SlideIn Component", () => {
     vi.clearAllMocks();
   });
 
-  // --- Renderer function ---
   const renderSlideIn = (props?: Partial<SlideInProps>) => {
     return render(<SlideIn {...defaultProps} {...props} />);
   };
 
-  // --- Mock useAnimatePresence ---
   const mockAnimatePresence = (overrides?: Partial<ReturnType<typeof useAnimatePresenceModule.useAnimatePresence>>) => {
     vi.spyOn(useAnimatePresenceModule, "useAnimatePresence").mockReturnValue({
       isMounted: true,
@@ -73,7 +71,7 @@ describe("SlideIn Component", () => {
     const handleClose = vi.fn();
     mockAnimatePresence({ isMounted: true });
     // Override useCallback for test
-    vi.spyOn(React, "useCallback").mockImplementation((fn) => handleClose as any);
+    vi.spyOn(React, "useCallback").mockImplementation(() => handleClose as any);
 
     renderSlideIn({ isOk: true });
     expect(handleClose).toHaveBeenCalled();
@@ -87,7 +85,7 @@ describe("SlideIn Component", () => {
 
   test("handles elemProps wrapper, container, content", () => {
     mockAnimatePresence();
-    const elemProps = {
+    const elemProps: any = {
       wrapperElProps: { "data-wrapper": "1" },
       containerElProps: { "data-container": "1" },
       contentElProps: { "data-content": "1" },

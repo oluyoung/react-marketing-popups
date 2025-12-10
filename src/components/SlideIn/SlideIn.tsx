@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo, type ComponentProps, type HTMLAttributes } from "react";
 import cn from "classnames";
 import styles from "./SlideIn.module.css";
 import {
@@ -19,6 +19,9 @@ export interface SlideInProps extends SharedProps {
   /** Direction from which the panel slides in */
   position?: Omit<AnimationPositions, 'top' | 'bottom'>;
 
+  /** Animation used for open and close of component */
+  animation?: Animations;
+
   /** className for root element */
   wrapperClassName?: string;
   
@@ -30,19 +33,12 @@ export interface SlideInProps extends SharedProps {
 
   /** Props for root element and content container element */
   elemProps?: {
-    wrapperElProps?: typeof HTMLDivElement,
-    containerElProps?: typeof HTMLDivElement,
-    contentElProps?: typeof HTMLDivElement,
+    wrapperElProps?: ComponentProps<'div'>;
+    containerElProps?: HTMLAttributes<HTMLDivElement>;
+    contentElProps?: HTMLAttributes<HTMLDivElement>;
   }
-
-  /** Animation used for open and close of component */
-  animation?: Animations;
 }
 
-/**
- * SlideIn Component
- * Smoothly animates content from left or right edges.
- */
 export const SlideIn: React.FC<SlideInProps> = ({
   open,
   position = "left",

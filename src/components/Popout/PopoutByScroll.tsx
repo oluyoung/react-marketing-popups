@@ -1,22 +1,20 @@
 import React from 'react'
-import { useScrollTrigger } from '../../hooks/useScrollTrigger'
-import { usePersistence } from '../../hooks/usePersistence';
+import { useScrollTrigger } from '../../hooks/useScrollTrigger';
 import { Popout, type PopoutProps } from './Popout';
+import { useFiredAndSeenEffect } from '../../hooks/useFiredAndSeen';
 
 export const PopoutByScroll: React.FC<PopoutProps> = (props) => {
   const [fired] = useScrollTrigger(props.triggerProps);
-  const { hasSeen, markSeen } = usePersistence(props.id || 'rmp-popout-inactivity');
-
-  React.useEffect(() => {
-    if (fired && !hasSeen()) props.onOpenChange(true);
-    if (fired && !props.open) markSeen();
-    if (props.isOk) markSeen();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fired, props.isOk]);
-
+  useFiredAndSeenEffect({
+    id: props.id || 'rmp-popout-scroll',
+    fired,
+    isOk: props.isOk,
+    onOpenChange: props.onOpenChange,
+    open: props.open
+  });
   return (
     <Popout {...props}>
       {props.children}
     </Popout>
-  )
+  );
 }

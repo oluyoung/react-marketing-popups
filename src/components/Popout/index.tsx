@@ -5,11 +5,6 @@ import { PopoutByInactivity } from './PopoutByInactivity';
 import { PopoutByExit } from './PopoutByExit';
 import { PopoutByScroll } from './PopoutByScroll';
 
-/**
- * Popout Component
- * Smoothly animates content into view
- * Choose an animation for the desired animation
- */
 export const Popout = ({
   trigger,
   ...props

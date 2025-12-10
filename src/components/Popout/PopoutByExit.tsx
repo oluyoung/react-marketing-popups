@@ -1,20 +1,18 @@
 import React from 'react';
 import { Popout } from '.';
 import { useExitIntentTrigger } from '../../hooks/useExitIntentTrigger';
-import { usePersistence } from '../../hooks/usePersistence';
 import type { PopoutProps } from './Popout';
+import { useFiredAndSeenEffect } from '../../hooks/useFiredAndSeen';
 
 export const PopoutByExit: React.FC<PopoutProps> = (props) => {
   const [fired] = useExitIntentTrigger();
-  const { hasSeen, markSeen } = usePersistence(props.id || 'rmp-popout-exit');
-
-  React.useEffect(() => {
-    if (fired && !hasSeen()) props.onOpenChange(true);
-    if (props.isOk) markSeen();
-    if (fired && !props.open) markSeen();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fired, props.isOk]);
-
+  useFiredAndSeenEffect({
+    id: props.id || 'rmp-popout-exit',
+    fired,
+    isOk: props.isOk,
+    onOpenChange: props.onOpenChange,
+    open: props.open
+  });
   return (
     <Popout {...props}>
       {props.children}

@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import type { Meta, StoryObj } from '@storybook/react';
 import { SlideIn } from '../components/SlideIn';
 import { addDisableToProps } from './utils/add-disabled-to-props';

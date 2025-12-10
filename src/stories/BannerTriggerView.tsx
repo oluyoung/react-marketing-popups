@@ -3,7 +3,7 @@ import { Banner } from '../components/Banner';
 import { reset } from './utils/reset-persistence';
 import { getInstruction } from './utils';
 import cn from 'classnames';
-import styles from './BannerTriggerVIew.module.css';
+import styles from './TriggerVIew.module.css';
 import { BannerTop } from '../templates/banner/Top';
 import { BannerLeft } from '../templates/banner/Left';
 import { BannerRight } from '../templates/banner/Right';
@@ -37,7 +37,7 @@ const BannerTriggerView = (args: any) => {
       <div className={cn(styles.content, { [styles.scrolled]: args.trigger === 'scroll' })}>
         <div>
           <p>{instructions}</p>
-          <button onClick={reset}>Reset Persistence</button>
+          <button onClick={reset} className={styles.showMeBtn}>Reset Persistence</button>
           <p><em>Note: Resetting persistence will cause a refresh.</em></p>
         </div>
         {args.trigger === 'scroll' && (
@@ -67,6 +67,7 @@ const BannerTriggerView = (args: any) => {
           setOpen(value);
         }}
         isOk={ok}
+        closeOnOk
       >
         {Content}
       </Banner>

@@ -21,11 +21,11 @@ export const SlideInRight = ({ onOk }: { onOk: () => void }) => {
           <div className={styles.offerAmount}>50% Off First 3 Months</div>
         </div>
 
-        <button className={styles.cta}>
+        <button className={styles.cta} onClick={onOk}>
           Upgrade to Premium
         </button>
 
-        <p className={styles.disclaimer} onClick={onOk}>
+        <p className={styles.disclaimer}>
           Cancel anytime • Money-back guarantee
         </p>
       </div>

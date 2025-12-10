@@ -1,18 +1,17 @@
 import React from 'react';
-import { useInactivityTrigger } from '../../hooks/useInactivityTrigger'
-import { usePersistence } from '../../hooks/usePersistence';
+import { useInactivityTrigger } from '../../hooks/useInactivityTrigger';
 import { SlideIn, type SlideInProps } from './SlideIn';
+import { useFiredAndSeenEffect } from '../../hooks/useFiredAndSeen';
 
 export const SlideInByInactivity: React.FC<SlideInProps> = (props) => {
   const [fired] = useInactivityTrigger(props.triggerProps);
-  const { hasSeen, markSeen } = usePersistence(props.id || 'rmp-slideIn-inactivity');
-
-  React.useEffect(() => {
-    if (fired && !hasSeen()) props.onOpenChange(true);
-    if (props.isOk) markSeen();
-    if (fired && !props.open) markSeen();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fired, props.isOk]);
+  useFiredAndSeenEffect({
+    id: props.id || 'rmp-slideIn-inactivity',
+    fired,
+    isOk: props.isOk,
+    onOpenChange: props.onOpenChange,
+    open: props.open
+  });
 
   return (
     <SlideIn {...props}>
