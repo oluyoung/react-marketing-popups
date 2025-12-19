@@ -1,7 +1,7 @@
 import { describe, test, expect, vi, beforeEach } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { Banner } from "./Banner";
+import { Banner } from "../../components/Banner";
 
 vi.mock("classnames", () => ({
   default: (...classes: string[]) => classes.filter(Boolean).join(" "),

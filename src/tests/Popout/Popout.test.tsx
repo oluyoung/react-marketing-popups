@@ -2,7 +2,7 @@ import React from "react";
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, test, expect, vi, beforeEach } from "vitest";
-import { Popout, type PopoutProps } from "./Popout";
+import { Popout, type PopoutProps } from "../../components/Popout/Popout";
 import * as useAnimatePresenceModule from "../../hooks/useAnimatePresence";
 import * as useFocusTrapModule from "../../hooks/useFocusTrap";
 

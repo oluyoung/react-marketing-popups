@@ -1,6 +1,6 @@
 import { describe, test, expect, vi, beforeEach, afterEach } from "vitest";
 import { renderHook, act } from "@testing-library/react";
-import { useExitIntentTrigger } from "./useExitIntentTrigger";
+import { useExitIntentTrigger } from "../../hooks/useExitIntentTrigger";
 
 describe("useExitIntentTrigger", () => {
   let addEventSpy: ReturnType<typeof vi.spyOn>;

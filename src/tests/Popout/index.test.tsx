@@ -1,19 +1,19 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import { describe, test, expect, vi, beforeEach } from "vitest";
-import { Popout } from "./Popout";
+import { Popout } from "../../components/Popout/Popout";
 import {
   PopoutByExit,
-} from "./PopoutByExit";
+} from "../../components/Popout/PopoutByExit";
 import {
   PopoutByInactivity,
-} from "./PopoutByInactivity";
+} from "../../components/Popout/PopoutByInactivity";
 import {
   PopoutByScroll,
-} from "./PopoutByScroll";
+} from "../../components/Popout/PopoutByScroll";
 import {
   PopoutByTimer
-} from "./PopoutByTimer";
+} from "../../components/Popout/PopoutByTimer";
 import * as useExitIntentTriggerModule from "../../hooks/useExitIntentTrigger";
 import * as useInactivityTriggerModule from "../../hooks/useInactivityTrigger";
 import * as useScrollTriggerModule from "../../hooks/useScrollTrigger";

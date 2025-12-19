@@ -1,6 +1,6 @@
 import { describe, test, expect, vi, beforeEach } from "vitest";
 import { renderHook, act } from "@testing-library/react";
-import { usePersistence } from "./usePersistence";
+import { usePersistence } from "../../hooks/usePersistence";
 
 describe("usePersistence", () => {
   let storageGetSpy: ReturnType<typeof vi.spyOn>;

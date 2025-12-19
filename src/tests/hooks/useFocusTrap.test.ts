@@ -1,6 +1,6 @@
 import { describe, test, expect, beforeEach, afterEach, vi } from "vitest";
 import { renderHook, act } from "@testing-library/react";
-import { useFocusTrap } from "./useFocusTrap";
+import { useFocusTrap } from "../../hooks/useFocusTrap";
 
 describe("useFocusTrap", () => {
   let addEventListenerSpy: ReturnType<typeof vi.spyOn>;

@@ -2,7 +2,7 @@ import React from "react";
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, test, expect, vi, beforeEach } from "vitest";
-import { SlideIn, type SlideInProps } from "./SlideIn";
+import { SlideIn, type SlideInProps } from "../../components/SlideIn/SlideIn";
 import * as useAnimatePresenceModule from "../../hooks/useAnimatePresence";
 
 describe("SlideIn Component", () => {

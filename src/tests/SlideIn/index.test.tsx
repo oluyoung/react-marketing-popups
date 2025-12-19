@@ -1,9 +1,9 @@
 import { render } from "@testing-library/react";
 import { describe, test, expect, vi, beforeEach } from "vitest";
-import { SlideInByExit } from "./SlideInByExit";
-import { SlideInByTimer } from "./SlideInByTimer";
-import { SlideInByScroll } from "./SlideInByScroll";
-import { SlideInByInactivity } from "./SlideInByInactivity";
+import { SlideInByExit } from "../../components/SlideIn/SlideInByExit";
+import { SlideInByTimer } from "../../components/SlideIn/SlideInByTimer";
+import { SlideInByScroll } from "../../components/SlideIn/SlideInByScroll";
+import { SlideInByInactivity } from "../../components/SlideIn/SlideInByInactivity";
 import * as useExitIntentTriggerModule from "../../hooks/useExitIntentTrigger";
 import * as useTimerTriggerModule from "../../hooks/useTimerTrigger";
 import * as useScrollTriggerModule from "../../hooks/useScrollTrigger";

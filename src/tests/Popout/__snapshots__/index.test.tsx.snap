@@ -1,0 +1,3 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Popout Trigger Components > Popout renders PopoutCore by default 1`] = `<div />`;

@@ -1,9 +1,9 @@
 import { describe, test, expect, vi, beforeEach } from "vitest";
 import { render } from "@testing-library/react";
-import { BannerByExit } from "./BannerByExit";
-import { BannerByTimer } from "./BannerByTimer";
-import { BannerByScroll } from "./BannerByScroll";
-import { BannerByInactivity } from "./BannerByInactivity";
+import { BannerByExit } from "../../components/Banner/BannerByExit";
+import { BannerByTimer } from "../../components/Banner/BannerByTimer";
+import { BannerByScroll } from "../../components/Banner/BannerByScroll";
+import { BannerByInactivity } from "../../components/Banner/BannerByInactivity";
 import * as useExitIntentTriggerModule from "../../hooks/useExitIntentTrigger";
 import * as useTimerTriggerModule from "../../hooks/useTimerTrigger";
 import * as useScrollTriggerModule from "../../hooks/useScrollTrigger";

@@ -1,6 +1,6 @@
 import { renderHook, act } from "@testing-library/react";
 import { describe, test, expect } from "vitest";
-import { useAnimatePresence } from "./useAnimatePresence";
+import { useAnimatePresence } from "../../hooks/useAnimatePresence";
 
 describe("useAnimatePresence", () => {
   const defaultProps = {

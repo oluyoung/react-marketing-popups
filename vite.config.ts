@@ -4,9 +4,7 @@ import { defineConfig } from "vite";
 import { resolve } from "node:path";
 import react from "@vitejs/plugin-react";
 import { libInjectCss } from "vite-plugin-lib-inject-css";
-// import { globSync } from 'glob';
 import dts from "vite-plugin-dts";
-import treeShakeable from "rollup-plugin-tree-shakeable";
 
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
@@ -24,11 +22,9 @@ export default defineConfig({
       ],
       tsconfigPath: "tsconfig.app.json",
     }),
-    treeShakeable(),
   ],
   build: {
     sourcemap: true,
-    // emptyOutDir: true,
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
       name: "ReactMarketingPopups",

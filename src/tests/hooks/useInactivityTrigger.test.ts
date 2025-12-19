@@ -1,6 +1,6 @@
 import { describe, test, expect, vi, beforeEach, afterEach } from "vitest";
 import { renderHook, act } from "@testing-library/react";
-import { useInactivityTrigger } from "./useInactivityTrigger";
+import { useInactivityTrigger } from "../../hooks/useInactivityTrigger";
 
 describe("useInactivityTrigger", () => {
   beforeEach(() => {
