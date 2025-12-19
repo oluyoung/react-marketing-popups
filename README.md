@@ -10,6 +10,8 @@ Designed for modern React apps and built around **smooth animations**, **configu
 
 Perfect for marketing teams, e-commerce flows, onboarding funnels, exit-intent modals, upsells, and announcements.
 
+Storybook demo: https://oluyoung.github.io/react-marketing-popups
+
 ---
 
 ## Features
